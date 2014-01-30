@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>		
+		<meta charset="UTF-8">
+		<title>&nbsp;</title>
+		<script src="jspos-0.2.2/lexer.js"></script>		
+		<script src="jspos-0.2.2/POSTagger.js"></script>		
+		<script src="jspos-0.2.2/lexicon.js_"></script>		
+		<script>
+		var words = new Lexer().lex("My name is Miguel");
+		var taggedWords = new POSTagger().tag(words);
+		for (i in taggedWords) {
+    	var taggedWord = taggedWords[i];
+    	var word = taggedWord[0];
+    	var tag = taggedWord[1];    	
+    	console.log(tag);
+}
+		</script>
+	</head>
+	<body>	
+		Input:
+<textarea id="input" rows="1" cols = "50"></textarea>
+<p>
+Output:
+<textarea id="output" rows="1" cols = "50"></textarea>
+	</body>
+</html>
+
