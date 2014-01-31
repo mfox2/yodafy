@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   
+<meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+
+ <title> Yodafy </title>
+ 
+ </head>
+
+ <style type="text/css">
+    #yodafy{
+       width: 1024px;
+       height: 768px;
+    }
+    
+    #form{
+        position: absolute;
+	width: 300px;
+	height: 200px;
+        top: 40%;
+        left: 36%;
+    }
+    
+ </style>
+ 
+ <script src="lexicon.js_"></script>
+ <script src="lexer.js"></script>
+ <script src="POSTagger.js"></script>
+ 
+ <script type="text/javascript">
+    
+    var stringArray = new Array();
+    
+    function answerQuestion()
+    {    
+        var input = document.getElementById('answer');
+        answer = input.value;
+        
+        if(answer)
+        {
+            console.log(answer);
+        }
+        else{
+            alert('Please enter your answer!');
+        }
+
+	 var words = new Lexer().lex(answer);
+         var taggedWords = new POSTagger().tag(words);
+                   
+	 for (i in taggedWords) {
+            var taggedWord = taggedWords[i];
+            var word = taggedWord[0];
+	    var tag = taggedWord[1];            
+			    
+	    stringArray.push(new specialWord(word, tag));
+         }
+	 
+	 console.log("The Sentence ");
+	 
+	 for(var i = 0; i<stringArray.length; i++)
+	 {
+	    console.log(stringArray[i].theWord);
+	 }
+	 
+	 console.log("The type ");
+	 
+	 for(var i = 0; i<stringArray.length; i++)
+	 {
+	    console.log(stringArray[i].type);
+	 }
+	 
+	 t2y();
+    }
+    
+    function specialWord(sentWord, sentType)
+   {
+      console.log("running special word");
+      
+        this.theWord = sentWord;
+        this.type =sentType;
+    }
+    
+    function t2y()
+    {
+        var g = new Array("U", "R", "J", "N", "P", "D", "V", "I");
+	
+	for(var i = 0; i<stringArray.length; i++)
+	{
+	 stringArray[i].type = stringArray[i].type.charAt(0);
+	}
+	
+	var newSentence = "";
+	
+	for(var i = 0; i<g.length; i++)
+	{
+	    for(var j = 0; j<stringArray.length; j++)
+	    {
+	       if(stringArray[j].type == g[i])
+	       {
+		  newSentence = newSentence + stringArray[j].theWord;
+		  newSentence = newSentence + " ";
+	       }
+	       
+	       else
+	       {
+		  console.log(stringArray[j].theWord);
+	       }
+	    }
+	}
+	
+	alert(newSentence);
+	
+	newSentence = "";
+    }
+    
+ </script>
+
+ <body>
+    <div id= "form">
+        <form>
+	   <center><input type = 'text' name = 'answer' id= 'answer'></center>
+           <center><a onClick = "answerQuestion();" href="javascript:void(0);" title="Answer">Submit</a></center>
+    	</form>
+    </div>
+ </body>
+ </head>
+ </html>
