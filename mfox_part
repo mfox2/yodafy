@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   
+<meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+
+ <title> Smith's Test </title>
+ 
+ </head>
+
+ <style type="text/css">
+    #smithstest{
+       width: 1024px;
+       height: 768px;
+    }
+    
+    #form{
+        position: absolute;
+	width: 300px;
+	height: 200px;
+        top: 40%;
+        left: 36%;
+    }
+    
+ </style>
+ 
+ <script src="lexicon.js_"</script>
+ <script src="lexer.js"></script>
+ <script src="POSTagger.js"></script>
+ 
+ <script type="text/javascript">
+    
+    var stringArray = new Array();
+    
+    function answerQuestion()
+    {    
+        var input = document.getElementById('answer');
+        answer = input.value;
+        
+        if(answer)
+        {
+            console.log(answer)
+        }
+        else{
+            alert('Please enter your answer!');
+        }
+        
+	var lexWords = new Lexer()lex(answer);
+	var tagWords = new POSTagger().tag(lexWords);
+	
+	for(var i = 0; i<tagWords.length; i++)
+	{
+	 var tagWord = taggedWords[i];
+	 stringArray.push(new specialWord(tagWord[0],tagWord[1]));
+	}
+	
+	for(var i = 0; i<stringArray.length; i++)
+	{
+	 console.log(stringArray[i].theWord);
+	 console.log(stringArray[i].type);
+	}
+    }
+    
+    function specialWord(sentWord, sentType)
+   {
+      console.log("running special word");
+      
+        this.theWord = sentWord;
+        this.type =sentType;
+    }
+    
+    function t2y(stringArray)
+    {
+        
+    }
+    
+ </script>
+
+ <body>
+    <div id= "form">
+        <form>
+	   <center><input type = 'text' name = 'answer' id= 'answer'></center>
+           <center><a onClick = "answerQuestion();" href="javascript:void(0);" title="Answer">Submit</a></center>
+    	</form>
+    </div>
+ </body>
+ </head>
+ </html>
