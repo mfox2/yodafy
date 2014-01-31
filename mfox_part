@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
@@ -5,12 +6,12 @@
 <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type">
 
- <title> Smith's Test </title>
+ <title> Yodafy </title>
  
  </head>
 
  <style type="text/css">
-    #smithstest{
+    #yodafy{
        width: 1024px;
        height: 768px;
     }
@@ -25,7 +26,7 @@
     
  </style>
  
- <script src="lexicon.js_"</script>
+ <script src="lexicon.js_"></script>
  <script src="lexer.js"></script>
  <script src="POSTagger.js"></script>
  
@@ -40,26 +41,36 @@
         
         if(answer)
         {
-            console.log(answer)
+            console.log(answer);
         }
         else{
             alert('Please enter your answer!');
         }
-        
-	var lexWords = new Lexer()lex(answer);
-	var tagWords = new POSTagger().tag(lexWords);
-	
-	for(var i = 0; i<tagWords.length; i++)
-	{
-	 var tagWord = taggedWords[i];
-	 stringArray.push(new specialWord(tagWord[0],tagWord[1]));
-	}
-	
-	for(var i = 0; i<stringArray.length; i++)
-	{
-	 console.log(stringArray[i].theWord);
-	 console.log(stringArray[i].type);
-	}
+
+	 var words = new Lexer().lex(answer);
+         var taggedWords = new POSTagger().tag(words);
+                   
+	 for (i in taggedWords) {
+            var taggedWord = taggedWords[i];
+            var word = taggedWord[0];
+	    var tag = taggedWord[1];            
+			    
+	    stringArray.push(new specialWord(word, tag));
+         }
+	 
+	 console.log("The Sentence ");
+	 
+	 for(var i = 0; i<stringArray.length; i++)
+	 {
+	    console.log(stringArray[i].theWord);
+	 }
+	 
+	 console.log("The type ");
+	 
+	 for(var i = 0; i<stringArray.length; i++)
+	 {
+	    console.log(stringArray[i].type);
+	 }
     }
     
     function specialWord(sentWord, sentType)
